@@ -2,8 +2,20 @@ package com.jagp.app.modelo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ordenes")
 public class Orden {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String numero;
@@ -12,19 +24,25 @@ public class Orden {
 
 	private Date fechaRecibida;
 
-	private double tota;
+	private double total;
+
+	@ManyToOne
+	private Usuario usuario;
+
+	@OneToOne(mappedBy = "orden")
+	private DetalleOrden detalle;
 
 	public Orden() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double tota) {
+	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaRecibida = fechaRecibida;
-		this.tota = tota;
+		this.total = total;
 	}
 
 	public Integer getId() {
@@ -59,20 +77,34 @@ public class Orden {
 		this.fechaRecibida = fechaRecibida;
 	}
 
-	public double getTota() {
-		return tota;
+	public double getTotal() {
+		return total;
 	}
 
-	public void setTota(double tota) {
-		this.tota = tota;
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public DetalleOrden getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(DetalleOrden detalle) {
+		this.detalle = detalle;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
 	public String toString() {
 		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
-				+ fechaRecibida + ", tota=" + tota + "]";
+				+ fechaRecibida + ", total=" + total + "]";
 	}
-	
-	
 
 }
