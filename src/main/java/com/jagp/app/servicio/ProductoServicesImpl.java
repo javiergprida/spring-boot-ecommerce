@@ -1,5 +1,6 @@
 package com.jagp.app.servicio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,12 @@ public class ProductoServicesImpl implements ProductoServices{
 	public void deleteProducto(Integer id) {
 		ProductoRepositorio.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Producto> findAllProducto() {
+		
+		return ProductoRepositorio.findAll();
 	}
 
 }
