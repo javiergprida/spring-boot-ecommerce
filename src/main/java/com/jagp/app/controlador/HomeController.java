@@ -1,5 +1,6 @@
 package com.jagp.app.controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jagp.app.modelo.DetalleOrden;
+import com.jagp.app.modelo.Orden;
 import com.jagp.app.modelo.Producto;
 import com.jagp.app.servicio.ProductoServices;
 
@@ -23,6 +27,12 @@ public class HomeController {
 	
 	@Autowired
 	private ProductoServices poductoServicio;
+	
+	//para almacenar los detales de la orden
+	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
+	
+	//datos de la orden
+	Orden orden = new Orden();
 	
 	@GetMapping("")
 	public String home(Model model) {
@@ -46,7 +56,18 @@ public class HomeController {
 	}
 	
 	@PostMapping("/carrito")
-	public String addCarrito() {
+	public String addCarrito(@RequestParam Integer id, @RequestParam Integer cantidad) {
+		
+		DetalleOrden detalleOrden = new DetalleOrden();
+		Producto producto = new Producto();
+		double sumaTotal = 0;
+		
+		Optional<Producto> optionalProducto = poductoServicio.getProducto(id);
+		log.info("producto añadido: {}", optionalProducto.get());
+		log.info("cantidad: {}", cantidad);
+		
+		
+		
 		return "usuario/carrito";
 	} 
 
