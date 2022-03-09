@@ -1,6 +1,7 @@
 package com.jagp.app.controlador;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,14 @@ public class HomeController {
 	}
 	
 	@GetMapping("producto_home/{id}")
-	public String productoHome(@PathVariable Integer id) {
+	public String productoHome(@PathVariable Integer id, Model model) {
 		log.info("id enviado como parametro {}", id);
+		Producto producto = new Producto();
+		Optional<Producto> productoOptional = poductoServicio.getProducto(id);
+		producto = productoOptional.get();
+		
+		model.addAttribute("producto", producto);
+		
 		return "usuario/producto_home";
 	}
 
