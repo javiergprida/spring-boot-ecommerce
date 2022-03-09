@@ -77,6 +77,7 @@ public class ProductoController {
 	
 	@PostMapping("/update")
 	public String updateProducto(Producto producto,  @RequestParam("img") MultipartFile file) throws IOException {
+		
 		Producto p = new Producto();
 		p = productoServicio.getProducto(producto.getId()).get();
 		
