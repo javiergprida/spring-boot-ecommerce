@@ -77,22 +77,23 @@ public class ProductoController {
 	
 	@PostMapping("/update")
 	public String updateProducto(Producto producto,  @RequestParam("img") MultipartFile file) throws IOException {
+		Producto p = new Producto();
+		p = productoServicio.getProducto(producto.getId()).get();
+		
 		
 		if(file.isEmpty()) {//es cuando editamos el producto pero no cambiamos la imagen
-			Producto p = new Producto();
-			p = productoServicio.getProducto(producto.getId()).get();
+			
 			producto.setImagen(p.getImagen());
 		}else {
 			//cuando se edita tambien la imagen
-			Producto p = new Producto();
-			p = productoServicio.getProducto(producto.getId()).get();
-			
+						
 			//metodo eliminar mientars no sea la imagen por defecto
 			if(!p.getImagen().equals("placeholder.png")) {
 				
 				upload.deleteImagen(p.getImagen());
 			}
-						
+			
+			producto.setUsuario(p.getUsuario());
 			String nombreImagen = upload.saveImagen(file);
 			producto.setImagen(nombreImagen);
 			
