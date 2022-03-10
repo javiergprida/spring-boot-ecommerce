@@ -17,6 +17,8 @@ public class DetalleOrden {
 	private Integer id;
 
 	private String nombre;
+	
+	private String imagen;
 
 	private double cantidad;
 
@@ -34,56 +36,109 @@ public class DetalleOrden {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
+	
+	
+
+	public DetalleOrden(Integer id, String nombre, String imagen, double cantidad, double precio, double total,
+			Orden orden, Producto producto) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.imagen = imagen;
 		this.cantidad = cantidad;
 		this.precio = precio;
 		this.total = total;
+		this.orden = orden;
+		this.producto = producto;
 	}
+
+
+	
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
+
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
+
+
+	public String getImagen() {
+		return imagen;
+	}
+
+
+
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+
+
 
 	public double getCantidad() {
 		return cantidad;
 	}
 
+
+
+
 	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
+
+
+
 
 	public double getPrecio() {
 		return precio;
 	}
 
+
+
+
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+
+
+
 
 	public double getTotal() {
 		return total;
 	}
 
+
+
+
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
-	
+
+
+
 
 	public Orden getOrden() {
 		return orden;
@@ -101,10 +156,15 @@ public class DetalleOrden {
 		this.producto = producto;
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "DetalleOrden [id=" + id + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio
-				+ ", total=" + total + "]";
+		return "DetalleOrden [id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", cantidad=" + cantidad
+				+ ", precio=" + precio + ", total=" + total + ", orden=" + orden + ", producto=" + producto + "]";
 	}
+
+	
 
 }
