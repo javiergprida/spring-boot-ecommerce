@@ -63,7 +63,7 @@
                   <td th:text="${detalle_orden.precio}"></td>
                   <td th:text="${detalle_orden.cantidad}"></td>
                   <td th:text="${detalle_orden.total}"></td>
-                  <td><a href="#" class="btn btn-danger">Quitar</a></td>
+                  <td><a th:href="@{/delete/cart/{id} (id=${detalle_orden.producto.id}) }" class="btn btn-danger">Quitar</a></td>
                 </tr>
               </tbody>
             </table>
@@ -82,9 +82,10 @@
       </div>
     </div>
     <!-- /.container -->
-
+	<br>
+	<br>
     <!-- Footer -->
-	<div th:include="usuario/template_user.html::footer"></div>
+	<div th:include="/usuario/template_user.html::footer"></div>
 
 	<!-- Bootstrap core JavaScript -->
 	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
