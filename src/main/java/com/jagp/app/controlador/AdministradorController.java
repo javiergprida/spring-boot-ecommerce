@@ -26,5 +26,11 @@ public class AdministradorController {
 		
 		return "administrador/home";
 	}
+	
+	@GetMapping("/admin")
+	public String verAdmin() {
+		
+		return "administrador/perfil";
+	}
 
 }

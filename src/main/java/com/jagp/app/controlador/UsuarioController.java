@@ -29,6 +29,13 @@ public class UsuarioController {
 		
 		return "usuario/registro";
 	}
+	
+	@GetMapping("/perfil")
+	public String verUsuario() {
+		
+		return "usuario/perfil";
+	}
+	
 
 	@PostMapping("/save_usuario")
 	public String saveUsuario(Usuario usuario) {

@@ -29,7 +29,7 @@ import com.jagp.app.servicio.IProductoServices;
 import com.jagp.app.servicio.IUsuarioServices;
 
 @Controller
-@RequestMapping(value={"", "/", "/home"})
+@RequestMapping(value={"", "/","home"})
 public class HomeController {
 	
 	private final Logger log = LoggerFactory.getLogger(HomeController.class);
@@ -51,16 +51,21 @@ public class HomeController {
 	
 	//datos de la orden
 	Orden orden = new Orden();
+		
 	
-	@GetMapping("")
+	@GetMapping("/home")
 	public String home(Model model, HttpSession session) {
 		log.info("Session del usuario: {}", session.getAttribute("id_usuario"));
 		
 		List<Producto> productos = poductoServicio.findAllProducto();
 		model.addAttribute("productos", productos);
 		
+		//session
+		model.addAttribute("session", session.getAttribute("id_usuario"));
+		
 		return "usuario/home";
 	}
+	
 	
 	@GetMapping("producto_home/{id}")
 	public String productoHome(@PathVariable Integer id, Model model) {
@@ -148,10 +153,13 @@ public class HomeController {
 	}
 
 	@GetMapping("/getCarrito")
-	public String getCarrito(Model model) {
+	public String getCarrito(Model model, HttpSession session) {
 		
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
+		
+		//session
+		model.addAttribute("session", session.getAttribute("id_usuario"));
 		
 		return "/usuario/carrito";
 	}
