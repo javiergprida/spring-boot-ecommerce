@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jagp.app.modelo.DetalleOrden;
 import com.jagp.app.modelo.Orden;
 import com.jagp.app.modelo.Producto;
-import com.jagp.app.servicio.ProductoServices;
+import com.jagp.app.modelo.Usuario;
+import com.jagp.app.servicio.IProductoServices;
+import com.jagp.app.servicio.IUsuarioServices;
 
 @Controller
 @RequestMapping(value={"", "/", "/home"})
@@ -26,7 +28,10 @@ public class HomeController {
 	private final Logger log = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private ProductoServices poductoServicio;
+	private IProductoServices poductoServicio;
+	
+	@Autowired
+	private IUsuarioServices usuarioServices;
 	
 	//para almacenar los detales de la orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
@@ -138,7 +143,13 @@ public class HomeController {
 	}
 	
 	@GetMapping("/orden")
-	public String orden() {
+	public String orden(Model model) {
+		
+		Usuario usuario = usuarioServices.findUsuarioById(1).get();
+		
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
 		
 		return "usuario/resumen_orden";
 	}

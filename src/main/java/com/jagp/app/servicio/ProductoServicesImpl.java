@@ -10,7 +10,7 @@ import com.jagp.app.modelo.Producto;
 import com.jagp.app.repositorio.IProductoRepository;
 
 @Service
-public class ProductoServicesImpl implements ProductoServices{
+public class ProductoServicesImpl implements IProductoServices{
 	
 	@Autowired
 	private IProductoRepository ProductoRepositorio;

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.jagp.app.modelo.Producto;
 
-public interface ProductoServices {
+public interface IProductoServices {
 
 	public Producto saveProducto (Producto producto);
 

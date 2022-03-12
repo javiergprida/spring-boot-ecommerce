@@ -18,12 +18,16 @@ public class Usuario {
 	private Integer id;
 
 	private String nombre;
+	
+	private String apellido;
 
 	private String username;
 
 	private String email;
 
 	private String telefono;
+	
+	private String direccion;
 
 	private String tipo;
 
@@ -39,17 +43,35 @@ public class Usuario {
 
 	}
 
-	public Usuario(Integer id, String nombre, String username, String email, String telefono, String tipo,
+	public Usuario(Integer id, String nombre, String apellido,String username, String email, String telefono,  String direccion,String tipo,
 			String password, List<Producto> productos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.username = username;
 		this.email = email;
 		this.telefono = telefono;
+		this.direccion = direccion;
 		this.tipo = tipo;
 		this.password = password;
 		this.productos = productos;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	public Integer getId() {
@@ -118,8 +140,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", username=" + username + ", email=" + email
-				+ ", telefono=" + telefono + ", tipo=" + tipo + ", password=" + password + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido +", username=" + username + ", email=" + email
+				+ ", telefono=" + telefono +  ", direccion=" + direccion +", tipo=" + tipo + ", password=" + password + "]";
 	}
 
 }

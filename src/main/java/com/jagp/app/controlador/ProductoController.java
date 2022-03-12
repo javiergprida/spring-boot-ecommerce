@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jagp.app.modelo.Producto;
 import com.jagp.app.modelo.Usuario;
-import com.jagp.app.servicio.ProductoServices;
+import com.jagp.app.servicio.IProductoServices;
 import com.jagp.app.servicio.UploadFileServices;
 
 @Controller
@@ -27,7 +27,7 @@ public class ProductoController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
 	
 	@Autowired
-	private ProductoServices productoServicio;
+	private IProductoServices productoServicio;
 	
 	@Autowired
 	private UploadFileServices upload;
@@ -46,7 +46,7 @@ public class ProductoController {
 	@PostMapping("/save")
 	public String saveProducto(Producto producto, @RequestParam("img") MultipartFile file) throws IOException {
 		LOGGER.info("este es el objeto producto {}",producto);
-		Usuario user = new Usuario(1, "", "", "", "", "", "", null);
+		Usuario user = new Usuario(1, "", "", "", "", "", "","", "", null);
 		producto.setUsuario(user);
 		
 		//imagen
