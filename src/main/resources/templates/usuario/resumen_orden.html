@@ -50,8 +50,9 @@
               <h5 class="card-title">
                 DATOS ORDEN
               </h5>
-              <h6 th:text="'Nombre: ' + ${usuario.nombre}"> </h6>
+              <h6 th:text="'Nombre: ' + ${usuario.nombre} +' '+ ${usuario.apellido}"> </h6>
               <h6 th:text="'Correo: ' + ${usuario.email}"> </h6>
+              <h6 th:text="'Username: ' + ${usuario.username}"></h6>
               <h6 th:text="'Dirección: ' + ${usuario.direccion}"></h6>
               <h6 th:text="'Telefono: ' + ${usuario.telefono}"></h6>
 

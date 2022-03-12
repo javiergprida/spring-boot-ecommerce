@@ -1,5 +1,9 @@
 package com.jagp.app.controlador;
 
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,41 @@ public class UsuarioController {
 		usuario.setTipo("USER");
 		
 		usuarioServicio.saveUsuario(usuario);
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/login")
+	public String loginUsuario() {
+		
+		return"usuario/login";
+	}
+	
+	@PostMapping("/acceder")
+	public String accesoUsuario(Usuario usuario, HttpSession session) {
+		
+		log.info("accesos: {}", usuario);
+		
+		Optional<Usuario> username = usuarioServicio.findByUsername(usuario.getUsername());
+		//log.info("usuario obtenido de la ddbb: {}", username.get());
+		
+		//Optional<Usuario> userEmail = usuarioServicio.findByEmail(usuario.getEmail());
+		//log.info("usuario obtenido de la ddbb: {}", userEmail.get());
+		
+		if(username.isPresent()) {
+			
+			session.setAttribute("id_usuario", username.get().getId());
+			if(username.get().getTipo().equals("ADMIN")) {
+				return"redirect:/administrador";
+			}else {
+				return"redirect:/";
+			}
+			
+		}else {
+			
+			log.info("usuario no encontrado");
+			
+		}
 		
 		return "redirect:/";
 	}

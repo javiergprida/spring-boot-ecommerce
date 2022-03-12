@@ -9,4 +9,8 @@ public interface IUsuarioServices {
 	Optional<Usuario> findUsuarioById(Integer id);
 	
 	Usuario saveUsuario(Usuario usuario);
+	
+	Optional<Usuario> findByEmail(String email);
+	
+	Optional<Usuario> findByUsername(String username);
 }
