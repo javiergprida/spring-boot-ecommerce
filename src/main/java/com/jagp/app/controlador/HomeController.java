@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,6 +192,17 @@ public class HomeController {
 		detalles.clear();
 		
 		return "redirect:/";
+	}
+	
+	@PostMapping("/buscar")
+	public String buscarProducto(@RequestParam String busqueda, Model model) {
+		log.info("nombre del producto : {}", busqueda);
+		
+		List<Producto> productos = poductoServicio.findAllProducto().stream().filter(p -> p.getNombre().contains(busqueda)).collect(Collectors.toList());
+		
+		model.addAttribute("productos",productos);
+		
+		return "usuario/home";
 	}
 	
 }
