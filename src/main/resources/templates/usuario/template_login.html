@@ -8,15 +8,7 @@
 		<div class="container">
 			<a class="navbar-brand" th:href="@{/home}">JavaShopping</a>
 
-			<form class="form-inline my-4 my-lg-0" method="post" th:action="@{/buscar}">
-				<input class="form-control mr-sm-2 " type="search"
-					placeholder="Buscar" aria-label="Search" name="busqueda"
-					autocomplete="off">
-				<button class="btn btn-outline-light my-2 my-sm-0"  type="submit">Buscar</button>
-			</form>
-			
-
-
+	
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +16,6 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link navbar-light active" th:href="@{/getCarrito}">Carrito</a></li>
 					<li class="nav-item"><a class="nav-link navbar-light active" href="login.html">Login</a></li>
 				</ul>
 			</div>
