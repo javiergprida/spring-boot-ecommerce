@@ -12,4 +12,6 @@ public interface IOrdenServices {
 	List<Orden> findAllOrden();
 
 	Orden saveOrden(Orden orden);
+	
+	String  generarNumeroOrden();
 }

@@ -1,6 +1,8 @@
 package com.jagp.app.controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,8 @@ import com.jagp.app.modelo.DetalleOrden;
 import com.jagp.app.modelo.Orden;
 import com.jagp.app.modelo.Producto;
 import com.jagp.app.modelo.Usuario;
+import com.jagp.app.servicio.IDetalleOrdenServices;
+import com.jagp.app.servicio.IOrdenServices;
 import com.jagp.app.servicio.IProductoServices;
 import com.jagp.app.servicio.IUsuarioServices;
 
@@ -32,6 +36,12 @@ public class HomeController {
 	
 	@Autowired
 	private IUsuarioServices usuarioServices;
+	
+	@Autowired
+	private IOrdenServices ordenServices;
+	
+	@Autowired
+	private IDetalleOrdenServices detalleOrdenServices;
 	
 	//para almacenar los detales de la orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
@@ -152,6 +162,35 @@ public class HomeController {
 		model.addAttribute("usuario", usuario);
 		
 		return "usuario/resumen_orden";
+	}
+	
+	//guardar orden
+	@GetMapping("/saveOrden")
+	public String saveOrden() {
+		
+		Date fechaCreacion = new Date();
+		orden.setFechaCreacion(fechaCreacion);
+		orden.setNumero(ordenServices.generarNumeroOrden());
+		
+		//usuario
+		Usuario usuario = usuarioServices.findUsuarioById(1).get();
+		
+		orden.setUsuario(usuario);
+		ordenServices.saveOrden(orden);
+		
+		//guardar detalles
+		for (DetalleOrden detalleOrden:detalles) {
+			
+			detalleOrden.setOrden(orden);
+			detalleOrdenServices.saveDetalleOrden(detalleOrden);
+			
+		}
+		
+		//limpiar lista y orden
+		orden = new Orden();
+		detalles.clear();
+		
+		return "redirect:/";
 	}
 	
 }
