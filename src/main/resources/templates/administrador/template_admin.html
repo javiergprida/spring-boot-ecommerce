@@ -26,11 +26,11 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> ADMIN </a> <!-- th:text=" 'ADMIN('+ ${usuario.username} +')'" -->
+						aria-haspopup="true" aria-expanded="false" th:text=" 'ADMIN(' + ${usuario.username} + ')'">  </a> <!-- th:text=" 'ADMIN('+ ${usuario.username} +')'" -->
 						
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" th:href="@{administrador/admin}">Perfil</a>
+							<a class="dropdown-item" th:href="@{administrador/perfil}">Perfil</a>
 							<a class="dropdown-item" th:href="@{/productos}">Productos</a>
 						</div>
 					</li>
