@@ -3,7 +3,7 @@
 <div th:fragment="header">
 
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
 		<div class="container">
 			<a class="navbar-brand" th:href="@{/}">JavaShopping</a>
 
@@ -37,7 +37,7 @@
 <div th:fragment="header_user">
 
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
 		<div class="container">
 			<a class="navbar-brand" th:href="@{/}">JavaShopping</a>
 
@@ -58,7 +58,7 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false" th:text=" 'USER(' + ${usuario.username} + ')'">  </a> <!-- th:text=" 'ADMIN('+ ${usuario.username} +')'" -->
+						aria-haspopup="true" aria-expanded="false" >  Usuario</a> <!-- th:text=" 'ADMIN('+ ${usuario.username} +')'" -->
 						
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
@@ -77,7 +77,7 @@
 
 <!-- Footer -->
 <div th:fragment="footer">
-	<footer class="py-4  navbar-light bg-success fixed-bottom">
+	<footer class="py-4  navbar-light bg-info fixed-bottom">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; JavaShopping 2022</p>
 		</div>

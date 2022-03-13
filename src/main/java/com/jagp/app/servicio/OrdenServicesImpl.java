@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jagp.app.modelo.Orden;
+import com.jagp.app.modelo.Usuario;
 import com.jagp.app.repositorio.IOrdenRepository;
 
 @Service
@@ -88,6 +89,12 @@ public class OrdenServicesImpl implements IOrdenServices{
 		
 		
 		return numeroConcatenado;
+	}
+
+	@Override
+	public List<Orden> findByUsuario(Usuario usuario) {
+		
+		return ordenRepositorio.findByUsuario(usuario);
 	}
 
 }

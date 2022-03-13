@@ -5,6 +5,7 @@ package com.jagp.app.servicio;
 import java.util.List;
 
 import com.jagp.app.modelo.Orden;
+import com.jagp.app.modelo.Usuario;
 
 
 public interface IOrdenServices {
@@ -14,4 +15,6 @@ public interface IOrdenServices {
 	Orden saveOrden(Orden orden);
 	
 	String  generarNumeroOrden();
+	
+	List<Orden> findByUsuario(Usuario usuario);
 }

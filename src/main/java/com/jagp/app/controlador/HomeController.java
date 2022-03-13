@@ -59,36 +59,37 @@ public class HomeController {
 	@GetMapping("")
 	public String home(Model model, HttpSession session) {
 		log.info("Session del usuario: {}", session.getAttribute("id_usuario"));
-		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		
+			model.addAttribute("productos", poductoServicio.findAllProducto());
+			
+			//session
+			model.addAttribute("sesion", session.getAttribute("id_usuario"));
+			
+			
+			return "usuario/home";
 		
 		
-		
-		
-		model.addAttribute("productos", poductoServicio.findAllProducto());
-		
-		//session
-		model.addAttribute("sesion", session.getAttribute("id_usuario"));
-		
-		model.addAttribute("usuario", usuario);
-		
-		return "usuario/home";
 	}
 	
 	
 	@GetMapping("producto_home/{id}")
-	public String productoHome(@PathVariable Integer id, Model model) {
+	public String productoHome(@PathVariable Integer id, Model model, HttpSession session) {
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
 		log.info("id enviado como parametro {}", id);
 		Producto producto = new Producto();
 		Optional<Producto> productoOptional = poductoServicio.getProducto(id);
 		producto = productoOptional.get();
 		
 		model.addAttribute("producto", producto);
+		model.addAttribute("usuario", usuario);
 		
 		return "usuario/producto_home";
 	}
 	
 	@PostMapping("/carrito")
-	public String addCarrito(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
+	public String addCarrito(@RequestParam Integer id, @RequestParam Integer cantidad, Model model, HttpSession session) {
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		
 		
 		DetalleOrden detalleOrden = new DetalleOrden();
 		Producto producto = new Producto();

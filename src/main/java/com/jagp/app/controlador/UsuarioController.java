@@ -1,5 +1,6 @@
 package com.jagp.app.controlador;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jagp.app.modelo.Orden;
 import com.jagp.app.modelo.Usuario;
+import com.jagp.app.servicio.IOrdenServices;
 import com.jagp.app.servicio.IUsuarioServices;
 
 @Controller
@@ -24,6 +27,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioServices usuarioServicio;
+	
+	@Autowired
+	private IOrdenServices ordenServicio;
 	
 	@GetMapping("/registro")
 	public String CrearUsuario() {
@@ -91,6 +97,11 @@ public class UsuarioController {
 	public String obtenerCompras(HttpSession session, Model model) {
 		
 		model.addAttribute("sesion", session.getAttribute("id_usuario"));
+		
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		List<Orden> ordenes = ordenServicio.findByUsuario(usuario);
+		
+		model.addAttribute("ordenes",ordenes);
 		
 		return "usuario/compras";
 	}
