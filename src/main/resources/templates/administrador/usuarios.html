@@ -3,15 +3,16 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-  <title>JavaShopping</title>
+<title>JavaShopping</title>
 
 
- <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
 <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
 	rel="stylesheet">
 
@@ -25,47 +26,47 @@
 	<!-- Navigation -->
 	<div th:include="administrador/template_admin.html::header"></div>
 
-<!-- Page Content -->
-<div class="container">
+	<!-- Page Content -->
+	<div class="container">
 
 
-  <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">
-    JavaShopping <small>Productos</small>
-  </h1>
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			JavaShopping <small>Productos</small>
+		</h1>
 
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a th:href="@{/administrador}">Home</a></li>
-    <li class="breadcrumb-item active">Ver Usuarios</li>
-  </ol>
-  <h2>Usuarios</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Username</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Email</th>
-        <th scope="col">Dirección</th>
-        <th scope="col">Telefono</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="user:${perfiles}">
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.nombre}"></td>
-        <td th:text="${user.apellido}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.direccion}"></td>
-        <td th:text="${user.telefono}"></td>
-      </tr>       
-    </tbody>
-  </table>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/administrador}">Home</a></li>
+			<li class="breadcrumb-item active">Ver Usuarios</li>
+		</ol>
+		<h2>Usuarios</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Username</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Apellido</th>
+					<th scope="col">Email</th>
+					<th scope="col">Dirección</th>
+					<th scope="col">Telefono</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user:${perfiles}">
+					<td th:text="${user.username}"></td>
+					<td th:text="${user.nombre}"></td>
+					<td th:text="${user.apellido}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.direccion}"></td>
+					<td th:text="${user.telefono}"></td>
+				</tr>
+			</tbody>
+		</table>
 
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
+	</div>
+	<!-- /.container -->
+	
+	<!-- Footer -->
 	<div th:include="administrador/template_admin.html::footer"></div>
 
 	<!-- Bootstrap core JavaScript -->
