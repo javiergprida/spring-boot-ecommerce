@@ -63,11 +63,6 @@ public class HomeController {
 			model.addAttribute("productos", poductoServicio.findAllProducto());
 			model.addAttribute("usuario", usuario);
 			return "usuario/home";
-			
-		
-		
-		
-		
 	}
 	
 	

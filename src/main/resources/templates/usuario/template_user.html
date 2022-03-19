@@ -55,17 +55,17 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown"><a
+					<li class="nav-item dropdown active"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false" th:text=" 'Usuario: ('+ ${usuario.username} + ')'">Usuario</a> <!-- th:text=" 'Usuario: '+ ${usuario.username} + ')'" -->
+						aria-haspopup="true" aria-expanded="false"  th:text=" 'Usuario: ('+ ${usuario.username} + ')'"  >Usuario</a> <!-- th:text=" 'Usuario: ('+ ${usuario.username} + ')'"  -->
 						
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" th:href="@{/usuario/perfil}">Perfil</a>
 							<a class="dropdown-item" th:href="@{/getCarrito}">Carrito</a>
 							<a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a>
-							<a class="dropdown-item" th:href="@{/}">Log-out</a>
+							<a class="dropdown-item" th:href="@{/usuario/log-out}">Log-out</a>
 						</div>
 					</li>
 				</ul>

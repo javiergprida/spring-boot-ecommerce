@@ -24,7 +24,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
+						class="nav-link dropdown-toggle active" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false" th:text=" 'Usuario: ('+ ${usuario.username} + ')'">Admin  </a> <!-- th:text=" 'ADMIN('+ ${usuario.username} +')'" -->
 						
@@ -32,7 +32,7 @@
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" th:href="@{administrador/perfil}">Perfil</a>
 							<a class="dropdown-item" th:href="@{/productos}">Productos</a>
-							<a class="dropdown-item" th:href="@{/}">Log-out</a>
+							<a class="dropdown-item" th:href="@{/usuario/log-out}">Log-out</a>
 						</div>
 					</li>
 				</ul>

@@ -126,4 +126,12 @@ public class UsuarioController {
 		return "usuario/detalle_compra";
 	}
 	
+	@GetMapping("/log-out")
+	public String cerrarSession(HttpSession session) {
+		
+		session.removeAttribute("id_usuario");
+		
+		return "redirect:/usuario/login";
+	}
+	
 }
