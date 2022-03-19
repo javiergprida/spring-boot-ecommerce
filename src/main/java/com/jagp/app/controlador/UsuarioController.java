@@ -56,12 +56,12 @@ public class UsuarioController {
 	public String saveUsuario(Usuario usuario) {
 		
 		//log.info("Usuario registrado: {}", usuario);
-		usuario.setTipo("ADMIN");
+		usuario.setTipo("USER");
 		usuario.setPassword(passEncoder.encode(usuario.getPassword()));
 		
 		usuarioServicio.saveUsuario(usuario);
 		
-		return "redirect:/";
+		return "redirect:/usuario/login";
 	}
 	
 	@GetMapping("/login")
@@ -70,25 +70,22 @@ public class UsuarioController {
 		return"usuario/login";
 	}
 	
-	@PostMapping("/acceder")
+	@GetMapping("/acceder")
 	public String accesoUsuario(Usuario usuario, HttpSession session,Model model) {
 		
 		//log.info("accesos: {}", usuario);
 		
-		Optional<Usuario> username = usuarioServicio.findByUsername(usuario.getUsername());
-		//log.info("usuario obtenido de la ddbb: {}", username.get());
+		Optional<Usuario> getUser = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString()));
 		
-		//Optional<Usuario> userEmail = usuarioServicio.findByEmail(usuario.getEmail());
-		//log.info("usuario obtenido de la ddbb: {}", userEmail.get());
 		
-		if(username.isPresent()) {
+		if(getUser.isPresent()) {
 			
-			session.setAttribute("id_usuario", username.get().getId());
-			if(username.get().getTipo().equals("ADMIN")) {
+			session.setAttribute("id_usuario", getUser.get().getId());
+			if(getUser.get().getTipo().equals("ADMIN")) {
 				return"redirect:/administrador";
 			}else {
 				
-				model.addAttribute("usuario", usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get());
+				model.addAttribute("usuario", getUser );
 				return"redirect:/";
 			}
 			
@@ -138,5 +135,16 @@ public class UsuarioController {
 		
 		return "redirect:/usuario/login";
 	}
+	
+	/*@Controller
+	public class NotFoundController {
+	    @RequestMapping("/error.html")
+	    public String render404(Model model) {
+	        // Add model attributes
+	        return "error";
+	    }
+	    
+	}
+	*/
 	
 }

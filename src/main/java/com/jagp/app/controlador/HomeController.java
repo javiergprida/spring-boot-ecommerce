@@ -58,7 +58,8 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model, HttpSession session) {
 		//log.info("Session del usuario: {}", session.getAttribute("id_usuario"));
-		if(session == null) {
+		
+		if(session != null) {
 		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
 		    model.addAttribute("sesion", session.getAttribute("id_usuario"));
 			model.addAttribute("productos", poductoServicio.findAllProducto());
