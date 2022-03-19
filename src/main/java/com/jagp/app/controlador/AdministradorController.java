@@ -43,5 +43,16 @@ public class AdministradorController {
 		
 		return "administrador/perfil";
 	}
+	
+	@GetMapping("/usuarios")
+	public String verUsuario(HttpSession session, Model model) {
+     Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+     
+		
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("perfiles", usuarioServicio.findAllUser());
+		
+		return "administrador/usuarios";
+	}
 
 }

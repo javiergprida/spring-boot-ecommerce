@@ -1,5 +1,6 @@
 package com.jagp.app.servicio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,12 @@ public class UsuarioServicesImpl implements IUsuarioServices{
 	public Optional<Usuario> findByUsername(String username) {
 		
 		return usuarioRepositorio.findByUsername(username);
+	}
+
+	@Override
+	public List<Usuario> findAllUser() {
+		
+		return usuarioRepositorio.findAll();
 	}
 
 	

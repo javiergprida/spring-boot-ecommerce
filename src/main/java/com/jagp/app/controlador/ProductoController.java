@@ -39,7 +39,9 @@ public class ProductoController {
 	private IUsuarioServices usuarioServicio;
 	
 	@GetMapping("")
-	public String show(Model model) {
+	public String show(HttpSession session, Model model) {
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		model.addAttribute("usuario", usuario);
 		model.addAttribute("productos", productoServicio.findAllProducto());
 		return "productos/show";
 	}
