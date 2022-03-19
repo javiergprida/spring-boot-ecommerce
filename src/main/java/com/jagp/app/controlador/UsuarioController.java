@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,7 +51,7 @@ public class UsuarioController {
 	@PostMapping("/save_usuario")
 	public String saveUsuario(Usuario usuario) {
 		
-		log.info("Usuario registrado: {}", usuario);
+		//log.info("Usuario registrado: {}", usuario);
 		usuario.setTipo("USER");
 		
 		usuarioServicio.saveUsuario(usuario);
@@ -65,9 +66,9 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/acceder")
-	public String accesoUsuario(Usuario usuario, HttpSession session) {
+	public String accesoUsuario(Usuario usuario, HttpSession session,Model model) {
 		
-		log.info("accesos: {}", usuario);
+		//log.info("accesos: {}", usuario);
 		
 		Optional<Usuario> username = usuarioServicio.findByUsername(usuario.getUsername());
 		//log.info("usuario obtenido de la ddbb: {}", username.get());
@@ -81,6 +82,8 @@ public class UsuarioController {
 			if(username.get().getTipo().equals("ADMIN")) {
 				return"redirect:/administrador";
 			}else {
+				
+				model.addAttribute("usuario", usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get());
 				return"redirect:/";
 			}
 			
@@ -102,8 +105,25 @@ public class UsuarioController {
 		List<Orden> ordenes = ordenServicio.findByUsuario(usuario);
 		
 		model.addAttribute("ordenes",ordenes);
+		model.addAttribute("usuario", usuario);
 		
 		return "usuario/compras";
+	}
+	
+	@GetMapping("/detalle-compra/{id}")
+	public String detalleCompra(@PathVariable Integer id, HttpSession session, Model model) {
+		//log.info("id de la irden: {}", id);
+		
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		Optional <Orden> orden = ordenServicio.findById(id);
+		
+		//session
+		model.addAttribute("session", session.getAttribute("id_usuario"));
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("detalles", orden.get().getDetalle());
+		
+		
+		return "usuario/detalle_compra";
 	}
 	
 }

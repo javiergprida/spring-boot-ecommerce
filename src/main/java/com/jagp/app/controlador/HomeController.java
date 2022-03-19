@@ -2,7 +2,6 @@ package com.jagp.app.controlador;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,26 +55,27 @@ public class HomeController {
 	Orden orden = new Orden();
 		
 	
-	@GetMapping("")
+	@GetMapping("/")
 	public String home(Model model, HttpSession session) {
-		log.info("Session del usuario: {}", session.getAttribute("id_usuario"));
-		
+		//log.info("Session del usuario: {}", session.getAttribute("id_usuario"));
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		    model.addAttribute("sesion", session.getAttribute("id_usuario"));
 			model.addAttribute("productos", poductoServicio.findAllProducto());
-			
-			//session
-			model.addAttribute("sesion", session.getAttribute("id_usuario"));
-			
-			
+			model.addAttribute("usuario", usuario);
 			return "usuario/home";
+			
+		
+		
 		
 		
 	}
 	
 	
+	
 	@GetMapping("producto_home/{id}")
 	public String productoHome(@PathVariable Integer id, Model model, HttpSession session) {
 		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
-		log.info("id enviado como parametro {}", id);
+		//log.info("id enviado como parametro {}", id);
 		Producto producto = new Producto();
 		Optional<Producto> productoOptional = poductoServicio.getProducto(id);
 		producto = productoOptional.get();
@@ -86,7 +86,7 @@ public class HomeController {
 		return "usuario/producto_home";
 	}
 	
-	@PostMapping("/carrito")
+	@PostMapping("/carrito/{id}")
 	public String addCarrito(@RequestParam Integer id, @RequestParam Integer cantidad, Model model, HttpSession session) {
 		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
 		
@@ -96,8 +96,8 @@ public class HomeController {
 		double sumaTotal = 0;
 		
 		Optional<Producto> optionalProducto = poductoServicio.getProducto(id);
-		log.info("producto añadido: {}", optionalProducto.get());
-		log.info("cantidad: {}", cantidad);
+		//log.info("producto añadido: {}", optionalProducto.get());
+		//log.info("cantidad: {}", cantidad);
 		
 		producto = optionalProducto.get();
 		
@@ -123,8 +123,10 @@ public class HomeController {
 		
 		orden.setTotal(sumaTotal);
 		
+		model.addAttribute("usuario", usuario);
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
+		
 		
 		return "usuario/carrito";
 	} 
@@ -164,11 +166,14 @@ public class HomeController {
 	@GetMapping("/getCarrito")
 	public String getCarrito(Model model, HttpSession session) {
 		
-		model.addAttribute("cart", detalles);
-		model.addAttribute("orden", orden);
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
 		
 		//session
 		model.addAttribute("session", session.getAttribute("id_usuario"));
+		
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
 		
 		return "/usuario/carrito";
 	}
@@ -216,7 +221,7 @@ public class HomeController {
 	
 	@PostMapping("/buscar")
 	public String buscarProducto(@RequestParam String busqueda, Model model) {
-		log.info("nombre del producto : {}", busqueda);
+		//log.info("nombre del producto : {}", busqueda);
 		
 		List<Producto> productos = poductoServicio.findAllProducto().stream().filter(p -> p.getNombre().contains(busqueda)).collect(Collectors.toList());
 		

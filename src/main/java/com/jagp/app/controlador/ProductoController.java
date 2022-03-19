@@ -45,16 +45,19 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/create")
-	public String create() {
+	public String create(HttpSession session, Model model) {
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		model.addAttribute("usuario", usuario);
 		return "productos/create";
 	}
 	
 	@PostMapping("/save")
-	public String saveProducto(Producto producto, @RequestParam("img") MultipartFile file, HttpSession session) throws IOException {
-		LOGGER.info("este es el objeto producto {}",producto);
+	public String saveProducto(Producto producto, @RequestParam("img") MultipartFile file, HttpSession session,  Model model) throws IOException {
+		//LOGGER.info("este es el objeto producto {}",producto);
 		
-		Usuario user = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
-		producto.setUsuario(user);
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
+		model.addAttribute("usuario", usuario);
+		producto.setUsuario(usuario);
 		
 		//imagen
 		if(producto.getId() == null) {
@@ -70,14 +73,16 @@ public class ProductoController {
 	
 	
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable Integer id, Model model) {
+	public String edit(@PathVariable Integer id, Model model, HttpSession session) {
+		Usuario usuario = usuarioServicio.findUsuarioById(Integer.parseInt(session.getAttribute("id_usuario").toString())).get();
 		Producto producto = new Producto();
 		Optional<Producto> optionalProducto = productoServicio.getProducto(id);
 		producto = optionalProducto.get();
 		
-		LOGGER.info("producto buscado {}",producto);
+		//LOGGER.info("producto buscado {}",producto);
 		
 		model.addAttribute("producto", producto);
+		model.addAttribute("usuario", usuario);
 		
 		return "productos/edit";
 	}
