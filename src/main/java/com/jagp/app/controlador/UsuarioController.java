@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,9 @@ public class UsuarioController {
 	@Autowired
 	private IOrdenServices ordenServicio;
 	
+	
+	BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder();
+	
 	@GetMapping("/registro")
 	public String CrearUsuario() {
 		
@@ -52,7 +56,8 @@ public class UsuarioController {
 	public String saveUsuario(Usuario usuario) {
 		
 		//log.info("Usuario registrado: {}", usuario);
-		usuario.setTipo("USER");
+		usuario.setTipo("ADMIN");
+		usuario.setPassword(passEncoder.encode(usuario.getPassword()));
 		
 		usuarioServicio.saveUsuario(usuario);
 		
